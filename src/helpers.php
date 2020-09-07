@@ -8,7 +8,7 @@
  */
 function wprs_get_city_data()
 {
-    $data = file_get_contents(WENPRISE_WC_CHINESIZE_URL . 'assets/scripts/city-code.json');
+    $data = file_get_contents(WENPRISE_WC_CHINESIZE_PATH . 'assets/scripts/city-code.json');
 
     return json_decode($data)->areas;
 }
