@@ -25,7 +25,6 @@ define('WENPRISE_WC_CHINESIZE_URL', plugin_dir_url(__FILE__));
 require WENPRISE_WC_CHINESIZE_PATH . 'src/helpers.php';
 require WENPRISE_WC_CHINESIZE_PATH . 'src/actions.php';
 
-
 add_action(
     'wp_enqueue_scripts',
     function ()

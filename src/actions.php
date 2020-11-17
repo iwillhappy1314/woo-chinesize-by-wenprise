@@ -11,12 +11,12 @@ add_filter(
         $user_id = get_current_user_id();
 
         $state_code = get_user_meta($user_id, 'billing_state', true);
-        if(!$state_code){
-           $state_code = 'CN2'; 
+        if ( ! $state_code) {
+            $state_code = 'CN2';
         }
 
-        $cities     = wprs_get_state_cities($state_code);
-        $cities     = wp_list_pluck($cities, 'name', 'name');
+        $cities = \WooChinesize\Helper::get_state_cities($state_code);
+        $cities = wp_list_pluck($cities, 'name', 'name');
 
         $fields[ 'first_name' ][ 'class' ][ 0 ] = 'form-row-wide';
         $fields[ 'first_name' ][ 'label' ]      = '收货人';
