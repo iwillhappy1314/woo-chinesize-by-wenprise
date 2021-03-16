@@ -80,3 +80,49 @@ add_filter('woocommerce_order_item_name', function ($html, $item, $is_visible)
     return $addon . $html;
 
 }, 10, 3);
+
+
+add_action('woocommerce_account_dashboard', function ()
+{
+    echo 'sfiefinijnv';
+});
+
+add_action('woocommerce_before_account_orders', function ()
+{
+    $order_status = wc_get_order_statuses();
+    $status       = isset($_GET[ 'wccn-status' ]) ? $_GET[ 'wccn-status' ] : false;
+
+    $html = '<div class="wccn-order__filter">';
+
+    if(!$status){
+        $html .= '<a class="wccn-order__filter-active" href="' . remove_query_arg('wccn-status') . '">' . __('All', 'wccn') . '</a>';
+    } else{
+        $html .= '<a href="' . remove_query_arg('wccn-status') . '">' . __('All', 'wccn') . '</a>';
+    }
+
+    foreach ($order_status as $key => $name) {
+        $link = add_query_arg('wccn-status', substr($key, 3, strlen($key) - 3));
+
+        if ($key === 'wc-' . $status) {
+            $html .= '<a class="wccn-order__filter-active" href="' . $link . '">' . $name . '</a>';
+        } else {
+            $html .= '<a href="' . $link . '">' . $name . '</a>';
+        }
+
+    }
+    $html .= '</div>';
+
+    echo $html;
+});
+
+
+add_filter('woocommerce_order_query_args', function ($args)
+{
+    $status = isset($_GET[ 'wccn-status' ]) ? $_GET[ 'wccn-status' ] : false;
+
+    if ($status) {
+        $args[ 'status' ] = [$status];
+    }
+
+    return $args;
+});
