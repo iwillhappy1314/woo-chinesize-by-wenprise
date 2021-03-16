@@ -6,7 +6,7 @@
  * Version: 1.0.3
  * Author: WordPress智库
  * Author URI: https://www.wpzhiku.com
- * Text Domain: wprs-wc-chinesize
+ * Text Domain: wc-chinesize
  * Domain Path: /languages
  */
 
