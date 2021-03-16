@@ -50,14 +50,12 @@ add_filter(
 );
 
 
-add_action(
-    'wp_head',
-    function ()
-    {
-        echo "<style type='text/css'>
+add_action('wp_head', function ()
+{
+    echo "<style type='text/css'>
                 .is-hidden {
                     display: none !important;
                 }
             </style>";
-    }
+}
 );
