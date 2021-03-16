@@ -78,7 +78,7 @@ add_filter('woocommerce_order_item_name', function ($html, $item, $is_visible)
     $item_data  = $item->get_data();
     $product_id = $item_data[ 'product_id' ];
 
-    $addon = '<a class="wccn-position-left wccn-mr-4" target=_blank href="' . get_permalink($product_id) . '">';
+    $addon = '<a class="wccn-float-left wccn-mr-4" target=_blank href="' . get_permalink($product_id) . '">';
     $addon .= wp_get_attachment_image(get_post_thumbnail_id($product_id), [64, 64]);
     $addon .= '</a>';
 
@@ -99,9 +99,9 @@ add_action('woocommerce_before_account_orders', function ()
 
     $html = '<div class="wccn-order__filter">';
 
-    if(!$status){
+    if ( ! $status) {
         $html .= '<a class="wccn-order__filter-active" href="' . remove_query_arg('wccn-status') . '">' . __('All', 'wc-chinesize') . '</a>';
-    } else{
+    } else {
         $html .= '<a href="' . remove_query_arg('wccn-status') . '">' . __('All', 'wc-chinesize') . '</a>';
     }
 
@@ -132,3 +132,9 @@ add_filter('woocommerce_order_query_args', function ($args)
 
     return $args;
 });
+
+
+add_filter('woocommerce_order_item_class', function ($class, $item, $order)
+{
+    return $class . ' wccn-order-detail-item';
+}, 12, 3);
