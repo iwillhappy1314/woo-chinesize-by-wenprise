@@ -40,7 +40,7 @@ do_action('woocommerce_before_account_orders', $has_orders); ?>
                             </time>
                         </div>
                         <div class="wccn-mr-6 wccn-order__number">
-                            订单号：
+                            <?= __('Order Number', 'wc-chinesize'); ?>
                             <a href="<?php echo esc_url($order->get_view_order_url()); ?>">
                                 <?php echo esc_html(_x('#', 'hash before order number', 'woocommerce') . $order->get_order_number()); ?>
                             </a>
@@ -107,7 +107,7 @@ do_action('woocommerce_before_account_orders', $has_orders); ?>
 
 
                         <div class='wccn-order__cell wccn-order__total'>
-                            <span class="wccn-hide wccn-sm-inline-block"><?= __('合计'); ?></span>
+                            <span class="wccn-hide wccn-sm-inline-block"><?= __('Total', 'wc-chinesize'); ?></span>
                             <?= get_woocommerce_currency_symbol(get_option('woocommerce_currency')); ?> <?= $order->get_total(); ?>
                         </div>
 

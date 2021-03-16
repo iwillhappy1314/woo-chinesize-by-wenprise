@@ -26,6 +26,11 @@ define('WENPRISE_WC_CHINESIZE_URL', plugin_dir_url(__FILE__));
 require WENPRISE_WC_CHINESIZE_PATH . 'src/helpers.php';
 require WENPRISE_WC_CHINESIZE_PATH . 'src/actions.php';
 
+add_action('plugins_loaded', function ()
+{
+    load_plugin_textdomain('wc-chinesize', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+});
+
 add_action('wp_enqueue_scripts', function ()
 {
     if (is_checkout() || is_wc_endpoint_url('edit-address')) {
@@ -95,9 +100,9 @@ add_action('woocommerce_before_account_orders', function ()
     $html = '<div class="wccn-order__filter">';
 
     if(!$status){
-        $html .= '<a class="wccn-order__filter-active" href="' . remove_query_arg('wccn-status') . '">' . __('All', 'wccn') . '</a>';
+        $html .= '<a class="wccn-order__filter-active" href="' . remove_query_arg('wccn-status') . '">' . __('All', 'wc-chinesize') . '</a>';
     } else{
-        $html .= '<a href="' . remove_query_arg('wccn-status') . '">' . __('All', 'wccn') . '</a>';
+        $html .= '<a href="' . remove_query_arg('wccn-status') . '">' . __('All', 'wc-chinesize') . '</a>';
     }
 
     foreach ($order_status as $key => $name) {
@@ -110,6 +115,7 @@ add_action('woocommerce_before_account_orders', function ()
         }
 
     }
+
     $html .= '</div>';
 
     echo $html;

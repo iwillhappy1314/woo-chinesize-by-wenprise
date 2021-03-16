@@ -1,0 +1,154 @@
+# Copyright (C) 2020 weForms
+# This file is distributed under the GPL2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Wenprise advanced variable manager\n"
+"POT-Creation-Date: 2021-03-16 21:16+0800\n"
+"PO-Revision-Date: 2021-03-16 21:16+0800\n"
+"Last-Translator: Amos Lee <iwillhappy1314@gmail.com>\n"
+"Language-Team: Wenprise <amos@wpcio.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
+"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
+"esc_html_x:1,2c\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: Poedit 2.4\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: templates/woocommerce/myaccount/orders.php:43
+msgid "Order Number"
+msgstr "订单号"
+
+#: templates/woocommerce/myaccount/orders.php:45
+msgctxt "hash before order number"
+msgid "#"
+msgstr "#"
+
+#: templates/woocommerce/myaccount/orders.php:110
+msgid "Total"
+msgstr "合计"
+
+#: templates/woocommerce/myaccount/orders.php:141
+msgid "Previous"
+msgstr "上一页"
+
+#: templates/woocommerce/myaccount/orders.php:145
+msgid "Next"
+msgstr "下一页"
+
+#: templates/woocommerce/myaccount/orders.php:152
+msgid "Browse products"
+msgstr "浏览产品"
+
+#: templates/woocommerce/myaccount/orders.php:153
+msgid "No order has been made yet."
+msgstr "暂时没有订单。"
+
+#: woo-chinesize-by-wenprise.php:103 woo-chinesize-by-wenprise.php:105
+msgid "All"
+msgstr "所有"
+
+#~ msgid "Store name"
+#~ msgstr "商店名称"
+
+#~ msgid "Store or company name"
+#~ msgstr "商店或公司名称"
+
+#~ msgid "Store contact name"
+#~ msgstr "商店联系人名称"
+
+#~ msgid "Store service contact name"
+#~ msgstr "商店联系人姓名"
+
+#~ msgid "Store contact phone"
+#~ msgstr "商店联系电话"
+
+#~ msgid "Store service phone"
+#~ msgstr "商店服务电话"
+
+#~ msgid "Store state/province"
+#~ msgstr "商店省份"
+
+#~ msgid "The province for your business location."
+#~ msgstr "商店所在的省份。"
+
+#~ msgid "Store county/district"
+#~ msgstr "商店区/县"
+
+#~ msgid "The county/district for your business location."
+#~ msgstr "商店所在的区/县。"
+
+#~ msgid "ZTO express Shipping options"
+#~ msgstr "中通快递选项"
+
+#~ msgid "Company ID"
+#~ msgstr "合作商编码"
+
+#~ msgid "ZTO express partner id"
+#~ msgstr "中通合作商编码"
+
+#~ msgid "Signature key"
+#~ msgstr "合作商签名"
+
+#~ msgid "ZTO express partner signature key"
+#~ msgstr "中通合作商签名"
+
+#~ msgid "Shop key"
+#~ msgstr "商店密钥"
+
+#~ msgid "ZTO express cloud print shop key"
+#~ msgstr "快递管家的商店密钥"
+
+#~ msgid "Sku"
+#~ msgstr "SKU"
+
+#~ msgid "Variable"
+#~ msgstr "变量"
+
+#~ msgid "Price"
+#~ msgstr "价格"
+
+#~ msgid "Regular Price"
+#~ msgstr "原价"
+
+#~ msgid "Manage Stock"
+#~ msgstr "管理库存"
+
+#~ msgid "Stock"
+#~ msgstr "库存"
+
+#~ msgid "Description"
+#~ msgstr "描述"
+
+#~ msgid "Yes"
+#~ msgstr "是"
+
+#~ msgid "No"
+#~ msgstr "否"
+
+#~ msgid "Advanced Variable"
+#~ msgstr "高级变量"
+
+#~ msgid "Edit Successful!"
+#~ msgstr "编辑成功！"
+
+#~ msgid "Edit"
+#~ msgstr "编辑"
+
+#~ msgid "Delete"
+#~ msgstr "删除"
+
+#~ msgid "Save"
+#~ msgstr "保存"
+
+#~ msgid "Confirm"
+#~ msgstr "确认"
+
+#~ msgid "Restore"
+#~ msgstr "恢复"
