@@ -34,6 +34,11 @@ Email: amos@wpcio.com
 1. 上传插件到`/wp-content/plugins/` 目录，或在 WordPress 安装插件界面搜索 "WooCommerce Chinesize"，点击安装。
 2. 在插件管理菜单激活插件
 
+## Screenshots ##
+
+1. 订单过滤器和优化后的订单列表
+2. 符合中国用户习惯的结账地址字段
+
 ## Upgrade Notice ##
 
 更新之前，请先备份数据库。
