@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Chinesize by Wenprise
  * Plugin URI: https://www.wpzhiku.com/woocommerce-chinesize
  * Description: 优化 WooCommerce 在中国的使用体验，地址字段重新排序，实现省市关联选择
- * Version: 1.0.3
+ * Version: 1.1.0
  * Author: WordPress智库
  * Author URI: https://www.wpzhiku.com
  * Text Domain: wc-chinesize
@@ -30,11 +30,10 @@ add_action('plugins_loaded', function ()
 
     require WENPRISE_WC_CHINESIZE_PATH . 'src/helpers.php';
     require WENPRISE_WC_CHINESIZE_PATH . 'src/actions.php';
-    // require WENPRISE_WC_CHINESIZE_PATH . 'src/settings.php';
 
     add_filter('woocommerce_get_settings_pages', function ($settings)
     {
-        $settings[] = include WENPRISE_WC_CHINESIZE_PATH . 'src/wc-settings.php';
+        $settings[] = include WENPRISE_WC_CHINESIZE_PATH . 'src/settings.php';
 
         return $settings;
     });
@@ -103,11 +102,6 @@ add_filter('woocommerce_order_item_name', function ($html, $item, $is_visible)
 
 }, 10, 3);
 
-
-add_action('woocommerce_account_dashboard', function ()
-{
-    echo 'sfiefinijnv';
-});
 
 add_action('woocommerce_before_account_orders', function ()
 {
