@@ -4,10 +4,10 @@ Donate link: https://www.wpzhiku.com/
 Tags: WooCommerce, 省市关联, checkout, address
 Requires PHP: 5.6.0
 Requires at least: 4.7
-Tested up to: 5.5
+Tested up to: 5.7
 WC requires at least: 3.5
-WC tested up to: 4.4
-Stable tag: 1.0.3
+WC tested up to: 5.0
+Stable tag: 1.1.0
 License: GPL-2.0+
 
 优化 WooCommerce 在中国的使用体验，地址字段重新排序，实现省市关联选择
