@@ -16,11 +16,11 @@ add_filter('woocommerce_default_address_fields', function ($fields)
     $cities = \WooChinesize\Helper::get_state_cities($state_code);
     $cities = wp_list_pluck($cities, 'name', 'name');
 
-    if (get_option('wccn_remove_company_fields') === 'yes') {
+    if (get_option('wccn_remove_company_fields', 'no') === 'yes') {
         unset($fields[ 'company' ]);
     }
 
-    if (get_option('wccn_remove_post_fields') === 'yes') {
+    if (get_option('wccn_remove_post_fields', 'no') === 'yes') {
         unset($fields[ 'postcode' ]);
     }
 

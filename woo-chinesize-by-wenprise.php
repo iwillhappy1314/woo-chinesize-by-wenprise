@@ -55,7 +55,7 @@ add_filter('woocommerce_locate_template', function ($template, $template_name, $
 {
     global $woocommerce;
 
-    if (get_option('wccn_order_list_template_enabled') !== 'yes') {
+    if (get_option('wccn_order_list_template_enabled', 'yes') !== 'yes') {
         return $template;
     }
 
@@ -87,7 +87,7 @@ add_filter('woocommerce_locate_template', function ($template, $template_name, $
  */
 add_filter('woocommerce_order_item_name', function ($html, $item, $is_visible)
 {
-    if (get_option('wccn_order_detail_template_enabled') !== 'yes') {
+    if (get_option('wccn_order_detail_template_enabled', 'yes') !== 'yes') {
         return $html;
     }
 
@@ -110,7 +110,7 @@ add_action('woocommerce_before_account_orders', function ()
     }
 
     $order_status   = wc_get_order_statuses();
-    $allowed_status = (array)get_option('wccn_order_status_allowed_to_filter');
+    $allowed_status = (array)get_option('wccn_order_status_allowed_to_filter', array_keys(wc_get_order_statuses()));
 
     $status = isset($_GET[ 'wccn-status' ]) ? $_GET[ 'wccn-status' ] : false;
 
@@ -123,13 +123,14 @@ add_action('woocommerce_before_account_orders', function ()
     }
 
     foreach ($order_status as $key => $name) {
-        if (in_array($key, $allowed_status)) {
-            $link = add_query_arg('wccn-status', substr($key, 3, strlen($key) - 3));
+        $status_slug = substr($key, 3, strlen($key) - 3);
+        if (wc_orders_count($status_slug) !== 0 && in_array($key, $allowed_status)) {
+            $link = add_query_arg('wccn-status', $status_slug);
 
             if ($key === 'wc-' . $status) {
-                $html .= '<a class="wccn-order__filter-active" href="' . $link . '">' . $name . '</a>';
+                $html .= '<a class="wccn-order__filter-active" href="' . $link . '">' . $name . '(' . wc_orders_count($status_slug) . ')</a>';
             } else {
-                $html .= '<a href="' . $link . '">' . $name . '</a>';
+                $html .= '<a href="' . $link . '">' . $name . '('. wc_orders_count($status_slug) .')</a>';
             }
         }
     }

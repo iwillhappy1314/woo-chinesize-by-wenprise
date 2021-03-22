@@ -92,26 +92,5 @@ class Helper{
         return $cites;
     }
 
-
-    /**
-     * 获取设置的值
-     *
-     * @param string $section 选项所属的设置区域
-     * @param string $option  选项名称
-     * @param string $default 找不到选项值时的默认值
-     *
-     * @return mixed
-     */
-    public static  function get_option($section, $option, $default = '')
-    {
-
-        $options = get_option($section);
-
-        if (isset($options[ $option ])) {
-            return $options[ $option ];
-        }
-
-        return $default;
-    }
 }
 
