@@ -134,7 +134,6 @@ add_action('woocommerce_before_account_orders', function ()
             $status_count_html .= wc_orders_count($status_slug);
             $status_count_html .= '</span>';
 
-
             if ($key === 'wc-' . $status) {
                 $html .= '<a class="wccn-order__filter-active" href="' . $link . '">' . $status_name_html . $status_count_html . '</a>';
             } else {

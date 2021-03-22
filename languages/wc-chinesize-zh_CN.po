@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Wenprise advanced variable manager\n"
-"POT-Creation-Date: 2021-03-22 15:24+0800\n"
-"PO-Revision-Date: 2021-03-22 15:27+0800\n"
+"POT-Creation-Date: 2021-03-22 18:06+0800\n"
+"PO-Revision-Date: 2021-03-22 18:06+0800\n"
 "Last-Translator: Amos Lee <iwillhappy1314@gmail.com>\n"
 "Language-Team: Wenprise <amos@wpcio.com>\n"
 "Language: zh_CN\n"
@@ -21,67 +21,71 @@ msgstr ""
 "X-Generator: Poedit 2.4\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: src/wc-settings.php:15
+#: src/settings.php:15
 msgid "Chinesize"
 msgstr "中国化"
 
-#: src/wc-settings.php:28
+#: src/settings.php:28
 msgid "Templates"
 msgstr "模板"
 
-#: src/wc-settings.php:29 src/wc-settings.php:77
+#: src/settings.php:29 src/settings.php:77
 msgid "Checkout Fields"
 msgstr "结帐字段"
 
-#: src/wc-settings.php:83 src/wc-settings.php:84
+#: src/settings.php:83
+msgid "Chinesized address"
+msgstr "中国化地址"
+
+#: src/settings.php:84
+msgid "Enable chinesized address fields"
+msgstr "启用中化地址字段"
+
+#: src/settings.php:91 src/settings.php:92
 msgid "Remove company fields"
 msgstr "删除公司字段"
 
-#: src/wc-settings.php:88 src/wc-settings.php:98
-msgid "This setting does not apply to guest purchases."
-msgstr ""
-
-#: src/wc-settings.php:93 src/wc-settings.php:94
+#: src/settings.php:100 src/settings.php:101
 msgid "Remove postcode fields"
 msgstr "删除邮编字段"
 
-#: src/wc-settings.php:116
+#: src/settings.php:122
 msgid "Orders Filter"
 msgstr "订单过滤器"
 
-#: src/wc-settings.php:123
-msgid "Allow filter order by status"
-msgstr "允许在筛选器中出现的状态"
+#: src/settings.php:129
+msgid "Order filter by status"
+msgstr "按订单状态过滤订单"
 
-#: src/wc-settings.php:124
+#: src/settings.php:130
 msgid "Enable order filter function in order list page."
 msgstr "在订单列表页面中启用订单筛选功能。"
 
-#: src/wc-settings.php:131
+#: src/settings.php:137
 msgid "Allowed order status"
 msgstr "允许的订单状态"
 
-#: src/wc-settings.php:132
+#: src/settings.php:138
 msgid "The order status allowed to filter."
 msgstr "允许筛选的订单状态。"
 
-#: src/wc-settings.php:148
+#: src/settings.php:154
 msgid "Use custom template"
 msgstr "使用自定义模板"
 
-#: src/wc-settings.php:155
-msgid "Use optimized order list template"
-msgstr "使用优化的订单列表模板"
+#: src/settings.php:161
+msgid "Order list template"
+msgstr "订单列表模板"
 
-#: src/wc-settings.php:156
+#: src/settings.php:162
 msgid "Use optimized template for order list page"
 msgstr "为订单列表页面使用优化的模版"
 
-#: src/wc-settings.php:163
-msgid "Use optimized order detail template"
-msgstr "使用优化的订单详细信息模板"
+#: src/settings.php:169
+msgid "Order detail template"
+msgstr "订单详情模板"
 
-#: src/wc-settings.php:164
+#: src/settings.php:170
 msgid "Use optimized template for order detail page"
 msgstr "为订单详情页面使用优化的模版"
 
@@ -114,9 +118,18 @@ msgstr "浏览产品"
 msgid "No order has been made yet."
 msgstr "暂时没有订单。"
 
-#: woo-chinesize-by-wenprise.php:113 woo-chinesize-by-wenprise.php:115
+#: woo-chinesize-by-wenprise.php:120 woo-chinesize-by-wenprise.php:122
 msgid "All"
 msgstr "所有"
+
+#~ msgid "Allow filter order by status"
+#~ msgstr "允许在筛选器中出现的状态"
+
+#~ msgid "Use optimized order list template"
+#~ msgstr "使用优化的订单列表模板"
+
+#~ msgid "Use optimized order detail template"
+#~ msgstr "使用优化的订单详细信息模板"
 
 #~ msgid "Store name"
 #~ msgstr "商店名称"

@@ -80,6 +80,14 @@ class WC_Chinesize_Settings extends WC_Settings_Page
                     ],
 
                     [
+                        'title'   => __('Chinesized address', 'wc-chinesize'),
+                        'desc'    => __('Enable chinesized address fields', 'wc-chinesize'),
+                        'id'      => 'wccn_chinesized_address_field_enabled',
+                        'default' => 'yes',
+                        'type'    => 'checkbox',
+                    ],
+
+                    [
                         'title'    => __('Remove company fields', 'wc-chinesize'),
                         'desc'     => __('Remove company fields', 'wc-chinesize'),
                         'id'       => 'wccn_remove_company_fields',
@@ -118,7 +126,7 @@ class WC_Chinesize_Settings extends WC_Settings_Page
                     ],
 
                     [
-                        'title'   => __('Allow filter order by status', 'wc-chinesize'),
+                        'title'   => __('Order filter by status', 'wc-chinesize'),
                         'desc'    => __('Enable order filter function in order list page.', 'wc-chinesize'),
                         'id'      => 'wccn_order_filter_enabled',
                         'default' => 'yes',
@@ -150,7 +158,7 @@ class WC_Chinesize_Settings extends WC_Settings_Page
                     ],
 
                     [
-                        'title'   => __('Use optimized order list template', 'wc-chinesize'),
+                        'title'   => __('Order list template', 'wc-chinesize'),
                         'desc'    => __('Use optimized template for order list page', 'wc-chinesize'),
                         'id'      => 'wccn_order_list_template_enabled',
                         'default' => 'yes',
@@ -158,7 +166,7 @@ class WC_Chinesize_Settings extends WC_Settings_Page
                     ],
 
                     [
-                        'title'   => __('Use optimized order detail template', 'wc-chinesize'),
+                        'title'   => __('Order detail template', 'wc-chinesize'),
                         'desc'    => __('Use optimized template for order detail page', 'wc-chinesize'),
                         'id'      => 'wccn_order_detail_template_enabled',
                         'default' => 'yes',

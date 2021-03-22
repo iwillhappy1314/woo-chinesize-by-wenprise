@@ -6,6 +6,18 @@
  */
 add_filter('woocommerce_default_address_fields', function ($fields)
 {
+    if (get_option('wccn_remove_company_fields', 'no') === 'yes') {
+        unset($fields[ 'company' ]);
+    }
+
+    if (get_option('wccn_remove_post_fields', 'no') === 'yes') {
+        unset($fields[ 'postcode' ]);
+    }
+
+    if (get_option('wccn_chinesized_address_field_enabled', 'yes') !== 'yes') {
+        return $fields;
+    }
+
     $user_id = get_current_user_id();
 
     $state_code = get_user_meta($user_id, 'billing_state', true);
@@ -15,14 +27,6 @@ add_filter('woocommerce_default_address_fields', function ($fields)
 
     $cities = \WooChinesize\Helper::get_state_cities($state_code);
     $cities = wp_list_pluck($cities, 'name', 'name');
-
-    if (get_option('wccn_remove_company_fields', 'no') === 'yes') {
-        unset($fields[ 'company' ]);
-    }
-
-    if (get_option('wccn_remove_post_fields', 'no') === 'yes') {
-        unset($fields[ 'postcode' ]);
-    }
 
     $fields[ 'first_name' ][ 'class' ][ 0 ] = 'form-row-wide';
     $fields[ 'first_name' ][ 'label' ]      = '收货人';
@@ -60,5 +64,4 @@ add_action('wp_head', function ()
                     display: none !important;
                 }
             </style>";
-}
-);
+});
