@@ -23,12 +23,22 @@ define('WENPRISE_WC_CHINESIZE_FILE_PATH', __FILE__);
 define('WENPRISE_WC_CHINESIZE_PATH', plugin_dir_path(__FILE__));
 define('WENPRISE_WC_CHINESIZE_URL', plugin_dir_url(__FILE__));
 
-require WENPRISE_WC_CHINESIZE_PATH . 'src/helpers.php';
-require WENPRISE_WC_CHINESIZE_PATH . 'src/actions.php';
 
 add_action('plugins_loaded', function ()
 {
     load_plugin_textdomain('wc-chinesize', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+
+    require WENPRISE_WC_CHINESIZE_PATH . 'src/helpers.php';
+    require WENPRISE_WC_CHINESIZE_PATH . 'src/actions.php';
+    // require WENPRISE_WC_CHINESIZE_PATH . 'src/settings.php';
+
+    add_filter('woocommerce_get_settings_pages', function ($settings)
+    {
+        $settings[] = include WENPRISE_WC_CHINESIZE_PATH . 'src/wc-settings.php';
+
+        return $settings;
+    });
+
 });
 
 add_action('wp_enqueue_scripts', function ()
@@ -46,6 +56,10 @@ add_filter('woocommerce_locate_template', function ($template, $template_name, $
 {
     global $woocommerce;
 
+    if (get_option('wccn_order_list_template_enabled') !== 'yes') {
+        return $template;
+    }
+
     $_template = $template;
 
     if ( ! $template_path) {
@@ -55,8 +69,7 @@ add_filter('woocommerce_locate_template', function ($template, $template_name, $
     $plugin_path = untrailingslashit(WENPRISE_WC_CHINESIZE_PATH) . '/templates/woocommerce/';
 
     // Look within passed path within the theme - this is priority
-    $template = locate_template([$template_path . $template_name, $template_name,]
-    );
+    $template = locate_template([$template_path . $template_name, $template_name,]);
 
     if ( ! $template && file_exists($plugin_path . $template_name)) {
         $template = $plugin_path . $template_name;
@@ -75,6 +88,10 @@ add_filter('woocommerce_locate_template', function ($template, $template_name, $
  */
 add_filter('woocommerce_order_item_name', function ($html, $item, $is_visible)
 {
+    if (get_option('wccn_order_detail_template_enabled') !== 'yes') {
+        return $html;
+    }
+
     $item_data  = $item->get_data();
     $product_id = $item_data[ 'product_id' ];
 
@@ -94,8 +111,14 @@ add_action('woocommerce_account_dashboard', function ()
 
 add_action('woocommerce_before_account_orders', function ()
 {
-    $order_status = wc_get_order_statuses();
-    $status       = isset($_GET[ 'wccn-status' ]) ? $_GET[ 'wccn-status' ] : false;
+    if (get_option('wccn_order_filter_enabled') !== 'yes') {
+        return false;
+    }
+
+    $order_status   = wc_get_order_statuses();
+    $allowed_status = (array)get_option('wccn_order_status_allowed_to_filter');
+
+    $status = isset($_GET[ 'wccn-status' ]) ? $_GET[ 'wccn-status' ] : false;
 
     $html = '<div class="wccn-order__filter">';
 
@@ -106,14 +129,15 @@ add_action('woocommerce_before_account_orders', function ()
     }
 
     foreach ($order_status as $key => $name) {
-        $link = add_query_arg('wccn-status', substr($key, 3, strlen($key) - 3));
+        if (in_array($key, $allowed_status)) {
+            $link = add_query_arg('wccn-status', substr($key, 3, strlen($key) - 3));
 
-        if ($key === 'wc-' . $status) {
-            $html .= '<a class="wccn-order__filter-active" href="' . $link . '">' . $name . '</a>';
-        } else {
-            $html .= '<a href="' . $link . '">' . $name . '</a>';
+            if ($key === 'wc-' . $status) {
+                $html .= '<a class="wccn-order__filter-active" href="' . $link . '">' . $name . '</a>';
+            } else {
+                $html .= '<a href="' . $link . '">' . $name . '</a>';
+            }
         }
-
     }
 
     $html .= '</div>';

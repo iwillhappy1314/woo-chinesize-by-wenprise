@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Wenprise advanced variable manager\n"
-"POT-Creation-Date: 2021-03-16 21:16+0800\n"
-"PO-Revision-Date: 2021-03-16 21:16+0800\n"
+"POT-Creation-Date: 2021-03-22 15:24+0800\n"
+"PO-Revision-Date: 2021-03-22 15:27+0800\n"
 "Last-Translator: Amos Lee <iwillhappy1314@gmail.com>\n"
 "Language-Team: Wenprise <amos@wpcio.com>\n"
 "Language: zh_CN\n"
@@ -20,6 +20,70 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: Poedit 2.4\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: src/wc-settings.php:15
+msgid "Chinesize"
+msgstr "中国化"
+
+#: src/wc-settings.php:28
+msgid "Templates"
+msgstr "模板"
+
+#: src/wc-settings.php:29 src/wc-settings.php:77
+msgid "Checkout Fields"
+msgstr "结帐字段"
+
+#: src/wc-settings.php:83 src/wc-settings.php:84
+msgid "Remove company fields"
+msgstr "删除公司字段"
+
+#: src/wc-settings.php:88 src/wc-settings.php:98
+msgid "This setting does not apply to guest purchases."
+msgstr ""
+
+#: src/wc-settings.php:93 src/wc-settings.php:94
+msgid "Remove postcode fields"
+msgstr "删除邮编字段"
+
+#: src/wc-settings.php:116
+msgid "Orders Filter"
+msgstr "订单过滤器"
+
+#: src/wc-settings.php:123
+msgid "Allow filter order by status"
+msgstr "允许在筛选器中出现的状态"
+
+#: src/wc-settings.php:124
+msgid "Enable order filter function in order list page."
+msgstr "在订单列表页面中启用订单筛选功能。"
+
+#: src/wc-settings.php:131
+msgid "Allowed order status"
+msgstr "允许的订单状态"
+
+#: src/wc-settings.php:132
+msgid "The order status allowed to filter."
+msgstr "允许筛选的订单状态。"
+
+#: src/wc-settings.php:148
+msgid "Use custom template"
+msgstr "使用自定义模板"
+
+#: src/wc-settings.php:155
+msgid "Use optimized order list template"
+msgstr "使用优化的订单列表模板"
+
+#: src/wc-settings.php:156
+msgid "Use optimized template for order list page"
+msgstr "为订单列表页面使用优化的模版"
+
+#: src/wc-settings.php:163
+msgid "Use optimized order detail template"
+msgstr "使用优化的订单详细信息模板"
+
+#: src/wc-settings.php:164
+msgid "Use optimized template for order detail page"
+msgstr "为订单详情页面使用优化的模版"
 
 #: templates/woocommerce/myaccount/orders.php:43
 msgid "Order Number"
@@ -50,7 +114,7 @@ msgstr "浏览产品"
 msgid "No order has been made yet."
 msgstr "暂时没有订单。"
 
-#: woo-chinesize-by-wenprise.php:103 woo-chinesize-by-wenprise.php:105
+#: woo-chinesize-by-wenprise.php:113 woo-chinesize-by-wenprise.php:115
 msgid "All"
 msgstr "所有"
 
