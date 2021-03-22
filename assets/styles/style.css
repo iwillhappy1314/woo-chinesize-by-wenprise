@@ -205,7 +205,13 @@
     border-bottom: 2px solid var(--woocommerce);
 }
 
+.wccn-order__filter-count:before{
+    content: '(';
+}
 
+.wccn-order__filter-count:after{
+    content: ')';
+}
 
 @media screen and (min-width: 1024px) {
     footer.copyright p {

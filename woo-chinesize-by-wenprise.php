@@ -124,17 +124,21 @@ add_action('woocommerce_before_account_orders', function ()
 
     foreach ($order_status as $key => $name) {
         $status_slug = substr($key, 3, strlen($key) - 3);
+
         if (wc_orders_count($status_slug) !== 0 && in_array($key, $allowed_status)) {
             $link = add_query_arg('wccn-status', $status_slug);
 
-            $status_count_html = '<span class="wccn-order__filter-count">(';
+            $status_name_html = '<span class="wccn-order__filter-name">' . $name . '</span>';
+
+            $status_count_html = '<span class="wccn-order__filter-count">';
             $status_count_html .= wc_orders_count($status_slug);
-            $status_count_html .= ')</span>';
+            $status_count_html .= '</span>';
+
 
             if ($key === 'wc-' . $status) {
-                $html .= '<a class="wccn-order__filter-active" href="' . $link . '"><span class="wccn-order__filter-name">' . $name . '</span>' . $status_count_html . '</a>';
+                $html .= '<a class="wccn-order__filter-active" href="' . $link . '">' . $status_name_html . $status_count_html . '</a>';
             } else {
-                $html .= '<a href="' . $link . '"><span class="wccn-order__filter-name">' . $name . '</span>' . $status_count_html . '</a>';
+                $html .= '<a href="' . $link . '">' . $status_name_html . $status_count_html . '</a>';
             }
         }
     }
