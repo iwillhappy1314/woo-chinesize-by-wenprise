@@ -125,13 +125,26 @@ add_action('woocommerce_before_account_orders', function ()
     foreach ($order_status as $key => $name) {
         $status_slug = substr($key, 3, strlen($key) - 3);
 
-        if (wc_orders_count($status_slug) !== 0 && in_array($key, $allowed_status)) {
+        $args = [
+            'numberposts' => -1,
+            'meta_key'    => '_customer_user',
+            'meta_value'  => get_current_user_id(),
+            'post_type'   => wc_get_order_types('view-orders'),
+        ];
+
+        if ($status_slug) {
+            $args[ 'post_status' ] = [$key];
+        }
+
+        $customer_orders = get_posts(apply_filters('woocommerce_my_account_my_orders_query', $args));
+
+        if (wc_orders_count($status_slug) !== 0 && in_array($key, $allowed_status) && $customer_orders) {
             $link = add_query_arg('wccn-status', $status_slug);
 
             $status_name_html = '<span class="wccn-order__filter-name">' . $name . '</span>';
 
             $status_count_html = '<span class="wccn-order__filter-count">';
-            $status_count_html .= wc_orders_count($status_slug);
+            $status_count_html .= count($customer_orders);
             $status_count_html .= '</span>';
 
             if ($key === 'wc-' . $status) {
