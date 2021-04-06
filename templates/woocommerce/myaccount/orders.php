@@ -65,6 +65,7 @@ do_action('woocommerce_before_account_orders', $has_orders); ?>
                                 $subtotal     = $item_data[ 'subtotal' ];
                                 $total        = $item_data[ 'total' ];
 
+                                $product = wc_get_product($product_id);
                                 ?>
                                 <div class='wccn-flex wccn-flex-grow wccn-item'>
 
@@ -85,7 +86,7 @@ do_action('woocommerce_before_account_orders', $has_orders); ?>
                                     </div>
 
                                     <div class="wccn-item__quantity">
-                                        x <?= $quantity; ?>
+                                       <?= get_woocommerce_currency_symbol(); ?> <?= $product->get_price(); ?> x <?= $quantity; ?>
                                     </div>
 
                                     <!--                                    <div class='wccn-item__total'>-->
