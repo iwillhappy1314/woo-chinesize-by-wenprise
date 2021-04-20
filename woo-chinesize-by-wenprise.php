@@ -42,10 +42,27 @@ add_action('plugins_loaded', function ()
 
 add_action('wp_enqueue_scripts', function ()
 {
-    if (is_checkout() || is_wc_endpoint_url('edit-address')) {
-        wp_register_script('wccn-city-picker', WENPRISE_WC_CHINESIZE_URL . 'assets/scripts/city-picker.js', ['jquery'], WENPRISE_WC_CHINESIZE_VERSION, true);
-        wp_enqueue_script('wccn-city-picker');
-    }
+    wp_register_script('wccn-city-data', WENPRISE_WC_CHINESIZE_URL . 'assets/scripts/city-data.js', [], WENPRISE_WC_CHINESIZE_VERSION, true);
+    wp_enqueue_script('wccn-city-data');
+
+    wp_localize_script('wccn-city-data', 'wc_sinic_enhanced_select', [
+        'i18n_no_matches'           => __('No matches found', 'WC_SINIC'),
+        'i18n_ajax_error'           => __('Loading failed', 'WC_SINIC'),
+        'i18n_input_too_short_1'    => __('Please enter 1 or more characters', 'WC_SINIC'),
+        'i18n_input_too_short_n'    => __('Please enter %qty% or more characters', 'WC_SINIC'),
+        'i18n_input_too_long_1'     => __('Please delete 1 character', 'WC_SINIC'),
+        'i18n_input_too_long_n'     => __('Please delete %qty% characters', 'WC_SINIC'),
+        'i18n_selection_too_long_1' => __('You can only select 1 item', 'WC_SINIC'),
+        'i18n_selection_too_long_n' => __('You can only select %qty% items', 'WC_SINIC'),
+        'i18n_load_more'            => __('Loading more results&hellip;', 'WC_SINIC'),
+        'i18n_searching'            => __('Loading...', 'WC_SINIC'),
+        'ajax_url'                  => admin_url('admin-ajax.php?action=wc_sinic_obj_search'),
+    ]);
+
+    // if (is_checkout() || is_wc_endpoint_url('edit-address')) {
+    wp_register_script('wccn-city-picker', WENPRISE_WC_CHINESIZE_URL . 'assets/scripts/city-picker.js', ['jquery', 'wccn-city-data'], WENPRISE_WC_CHINESIZE_VERSION, true);
+    wp_enqueue_script('wccn-city-picker');
+    // }
 
     wp_enqueue_style('wccn-style', WENPRISE_WC_CHINESIZE_URL . 'assets/styles/style.css', [], WENPRISE_WC_CHINESIZE_VERSION, '');
 }, 999);

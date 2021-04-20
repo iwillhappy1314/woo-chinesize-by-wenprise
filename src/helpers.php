@@ -2,7 +2,8 @@
 
 namespace WooChinesize;
 
-class Helper{
+class Helper
+{
     /**
      * 获取城市数据
      *
@@ -80,16 +81,39 @@ class Helper{
     public static function get_state_cities($state_code)
     {
         $city_data = self::get_city_data();
-        $city_code = self::city_code_convert($state_code);
         $cites     = [];
 
         foreach ($city_data as $city) {
-            if ($city->code == $city_code) {
-                $cites = $city->cities;
+            if ($city->id == $state_code) {
+                $cites = $city->children;
             }
         }
 
         return $cites;
+    }
+
+
+    /**
+     * 获取城市对应的区/县
+     *
+     * @param $state_code
+     * @param $city_name
+     *
+     * @return array
+     */
+    public static function get_city_areas($state_code, $city_name)
+    {
+        $cites = self::get_state_cities($state_code);
+
+        $areas = [];
+
+        foreach ($cites as $city) {
+            if ($city->name == $city_name) {
+                $areas = $city->children;
+            }
+        }
+
+        return $areas;
     }
 
 }

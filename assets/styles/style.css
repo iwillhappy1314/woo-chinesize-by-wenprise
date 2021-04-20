@@ -223,8 +223,28 @@
     }
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 993px) {
+    body .woocommerce-MyAccount-content .address-field.form-row-first,
+    body .col2-set .address-field.form-row-first{
+        width: 32%;
+        margin-right: 0;
+    }
 
+    body .woocommerce-MyAccount-content .address-field.form-row-last,
+    body .col2-set .address-field.form-row-last{
+        width: 32%;
+        float: left;
+        margin-left: 2%;
+        margin-right: 0;
+    }
+
+    body .woocommerce-MyAccount-content .address-field.form-row-addon,
+    body .col2-set .address-field.form-row-addon{
+        width: 32%;
+        float: left;
+        clear: right;
+        margin-left: 2%;
+    }
 }
 
 @media screen and (max-width: 768px) {
