@@ -29,7 +29,7 @@ add_filter('woocommerce_default_address_fields', function ($fields)
     $state_code = get_user_meta($user_id, 'billing_state', true);
 
     // 国家
-    $fields[ 'country' ][ 'class' ][] = 'is-hidden';
+    $fields[ 'country' ][ 'class' ][] = 'wccn-is-hidden';
 
     // 省/直辖市/自治区
     $fields[ 'state' ][ 'label' ]                               = '省份';
@@ -124,14 +124,23 @@ add_filter('woocommerce_billing_fields', function ($fields)
     return $fields;
 });
 
-// add_filter('woocommerce_shipping_fields');
-// add_filter('woocommerce_billing_fields');
+
+/**
+ * 修改地址显示格式
+ */
+add_filter('woocommerce_localisation_address_formats', function ($formats)
+{
+    $formats[ 'CN' ] = "{state}{city}{address_1}{address_2}\n{company}\n{name}";
+
+    return $formats;
+});
+
 // add_filter('woocommerce_checkout_fields');
 
 add_action('wp_head', function ()
 {
     echo "<style type='text/css'>
-                .is-hidden {
+                .wccn-is-hidden {
                     display: none !important;
                 }
             </style>";
