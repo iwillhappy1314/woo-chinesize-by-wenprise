@@ -135,6 +135,29 @@ add_filter('woocommerce_localisation_address_formats', function ($formats)
     return $formats;
 });
 
+
+add_filter('fr_address_book_for_woocommerce_address_fields', function ($fields, $address_id, $saved_addresses)
+{
+    $state_code = $saved_addresses[ $address_id ][ 'state' ];
+    $city_name  = $saved_addresses[ $address_id ][ 'city' ];
+    $area_name  = $saved_addresses[ $address_id ][ 'address_1' ];
+
+    $cities = Helper::get_state_cities($state_code);
+    $cities = wp_list_pluck($cities, 'name', 'name');
+
+    $areas = Helper::get_city_areas($state_code, $city_name);
+    $areas = wp_list_pluck($areas, 'name', 'name');
+
+    $fields[ 'billing_city' ][ 'options' ]                             = $cities;
+    $fields[ 'billing_city' ][ 'custom_attributes' ][ 'data-default' ] = $city_name;
+
+    $fields[ 'billing_address_1' ][ 'options' ]                             = $areas;
+    $fields[ 'billing_address_1' ][ 'custom_attributes' ][ 'data-default' ] = $area_name;
+
+    return $fields;
+}, 10, 3);
+
+
 // add_filter('woocommerce_checkout_fields');
 
 add_action('wp_head', function ()
