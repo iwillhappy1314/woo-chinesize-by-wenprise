@@ -7,7 +7,7 @@ Requires at least: 4.7
 Tested up to: 5.7
 WC requires at least: 3.5
 WC tested up to: 5.0
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPL-2.0+
 
 优化 WooCommerce 在中国的使用体验，地址字段重新排序，实现省市关联选择
@@ -49,6 +49,10 @@ Email: amos@wpcio.com
 ## Screenshots ##
 
 ## Changelog ##
+
+### 1.2.1###
+
+* Bugifx
 
 ### 1.2.0 ###
 * 省市二级选择改为省市区三级选择
