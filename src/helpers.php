@@ -81,12 +81,16 @@ class Helper
     public static function get_state_cities($state_code)
     {
         $location_data = self::get_location_data();
-        $cites     = [];
+        $cites         = [];
 
         foreach ($location_data as $city) {
             if ($city->id == $state_code) {
                 $cites = $city->children;
             }
+        }
+
+        if (empty($cites)) {
+            $cites = $location_data[ 0 ]->children;
         }
 
         return $cites;
@@ -110,6 +114,10 @@ class Helper
             if ($city->name == $city_name) {
                 $areas = $city->children;
             }
+        }
+
+        if (empty($areas)) {
+            $areas = $cites[ 0 ]->children;
         }
 
         return $areas;
