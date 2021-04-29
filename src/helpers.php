@@ -9,7 +9,7 @@ class Helper
      *
      * @return array|mixed|object
      */
-    public static function get_city_data()
+    public static function get_location_data()
     {
         $data = file_get_contents(WENPRISE_WC_CHINESIZE_PATH . 'assets/scripts/city-code.json');
 
@@ -80,10 +80,10 @@ class Helper
      */
     public static function get_state_cities($state_code)
     {
-        $city_data = self::get_city_data();
+        $location_data = self::get_location_data();
         $cites     = [];
 
-        foreach ($city_data as $city) {
+        foreach ($location_data as $city) {
             if ($city->id == $state_code) {
                 $cites = $city->children;
             }
@@ -104,7 +104,6 @@ class Helper
     public static function get_city_areas($state_code, $city_name)
     {
         $cites = self::get_state_cities($state_code);
-
         $areas = [];
 
         foreach ($cites as $city) {

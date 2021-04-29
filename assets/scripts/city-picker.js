@@ -16,8 +16,6 @@
         var html = ['<option value="">选择城市</option>'];
         var default_city = city_el.data('default');
 
-        console.log(selected_state);
-
         // 选择了省份
         if (selected_state && selected_state !== '') {
             var state_data = woo_chinesize_city_data.filter(function(item) {
@@ -34,6 +32,7 @@
 
             html = html.join('');
 
+            $(this).focus();
             city_el.find('option').remove();
             city_el.append(html).trigger('change');
         }
@@ -71,6 +70,7 @@
 
             html = html.join('');
 
+            $(this).focus();
             area_el.find('option').remove();
             area_el.append(html).trigger('change');
         }

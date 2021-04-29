@@ -136,6 +136,9 @@ add_filter('woocommerce_localisation_address_formats', function ($formats)
 });
 
 
+/**
+ * 兼容 fr-address-book-for-woocommerce 插件
+ */
 add_filter('fr_address_book_for_woocommerce_address_fields', function ($fields, $address_id, $saved_addresses)
 {
     $state_code = $saved_addresses[ $address_id ][ 'state' ];
