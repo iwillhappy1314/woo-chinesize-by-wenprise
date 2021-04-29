@@ -95,7 +95,7 @@
     flex: none;
 }
 
-.wccn-item__image img{
+.wccn-item__image img {
     vertical-align: middle;
 }
 
@@ -113,28 +113,28 @@
     font-size: 14px;
 }
 
-.wccn-order-detail-item .wc-item-meta{
+.wccn-order-detail-item .wc-item-meta {
     display: block;
     padding-left: 80px;
     margin-bottom: 0;
 }
 
-.wccn-order-detail-item .wc-item-meta p{
+.wccn-order-detail-item .wc-item-meta p {
     margin-bottom: 0;
     font-size: 14px !important;
 }
 
-.wccn-order-detail-item .wc-item-meta strong{
+.wccn-order-detail-item .wc-item-meta strong {
     text-transform: capitalize;
 }
 
 .wccn-order-detail-item .wc-item-meta li:before,
-.wccn-order-detail-item .wc-item-meta li:after{
+.wccn-order-detail-item .wc-item-meta li:after {
     clear: none;
     content: none;
 }
 
-.wccn-item__name ul.wc-item-meta{
+.wccn-item__name ul.wc-item-meta {
     margin-bottom: 0;
     padding: 0;
     margin-top: 5px;
@@ -186,11 +186,11 @@
     margin-bottom: 0 !important;
 }
 
-.wccn-order__filter{
+.wccn-order__filter {
     margin-bottom: 1rem;
 }
 
-.wccn-order__filter a{
+.wccn-order__filter a {
     display: inline-block;
     font-size: 14px;
     margin-right: 8px;
@@ -198,7 +198,7 @@
     text-decoration: none !important;
 }
 
-.wccn-order__filter a.wccn-order__filter-active{
+.wccn-order__filter a.wccn-order__filter-active {
     font-weight: bolder;
     color: #f00;
     color: var(--woocommerce);
@@ -206,11 +206,11 @@
     border-bottom: 2px solid var(--woocommerce);
 }
 
-.wccn-order__filter-count:before{
+.wccn-order__filter-count:before {
     content: '(';
 }
 
-.wccn-order__filter-count:after{
+.wccn-order__filter-count:after {
     content: ')';
 }
 
@@ -225,26 +225,27 @@
 }
 
 @media screen and (min-width: 993px) {
+    body .col2-set .address-field.form-row-last,
+    body .col2-set .address-field.form-row-first,
     body .woocommerce-MyAccount-content .address-field.form-row-first,
-    body .col2-set .address-field.form-row-first{
+    body .woocommerce-MyAccount-content .address-field.form-row-last,
+    body .woocommerce-MyAccount-content .address-field.form-row-addon,
+    body .col2-set .address-field.form-row-addon {
         width: 32%;
+        float: left;
         margin-right: 0;
+        box-sizing: border-box;
     }
 
     body .woocommerce-MyAccount-content .address-field.form-row-last,
-    body .col2-set .address-field.form-row-last{
-        width: 32%;
-        float: left;
+    body .col2-set .address-field.form-row-last {
         margin-left: 2%;
-        margin-right: 0;
     }
 
     body .woocommerce-MyAccount-content .address-field.form-row-addon,
-    body .col2-set .address-field.form-row-addon{
-        width: 32%;
-        float: left;
-        clear: right;
+    body .col2-set .address-field.form-row-addon {
         margin-left: 2%;
+        clear: right;
     }
 }
 

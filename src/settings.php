@@ -106,6 +106,15 @@ class WC_Chinesize_Settings extends WC_Settings_Page
                     ],
 
                     [
+                        'title'    => __('Disable Select2', 'wc-chinesize'),
+                        'desc'     => __('Disable Select2 built in WooCommerce', 'wc-chinesize'),
+                        'id'       => 'wccn_disable_select2',
+                        'type'     => 'checkbox',
+                        'default'  => 'no',
+                        'autoload' => false,
+                    ],
+
+                    [
                         'type' => 'sectionend',
                         'id'   => 'digital_download_options',
                     ],

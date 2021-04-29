@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Wenprise advanced variable manager\n"
-"POT-Creation-Date: 2021-03-22 18:06+0800\n"
-"PO-Revision-Date: 2021-03-22 18:06+0800\n"
+"POT-Creation-Date: 2021-04-29 15:53+0800\n"
+"PO-Revision-Date: 2021-04-29 15:53+0800\n"
 "Last-Translator: Amos Lee <iwillhappy1314@gmail.com>\n"
 "Language-Team: Wenprise <amos@wpcio.com>\n"
 "Language: zh_CN\n"
@@ -49,43 +49,51 @@ msgstr "删除公司字段"
 msgid "Remove postcode fields"
 msgstr "删除邮编字段"
 
-#: src/settings.php:122
+#: src/settings.php:109
+msgid "Disable Select2"
+msgstr "禁用Select2"
+
+#: src/settings.php:110
+msgid "Disable Select2 built in WooCommerce"
+msgstr "禁用WooCommerce内置的Select2"
+
+#: src/settings.php:131
 msgid "Orders Filter"
 msgstr "订单过滤器"
 
-#: src/settings.php:129
+#: src/settings.php:138
 msgid "Order filter by status"
 msgstr "按订单状态过滤订单"
 
-#: src/settings.php:130
+#: src/settings.php:139
 msgid "Enable order filter function in order list page."
 msgstr "在订单列表页面中启用订单筛选功能。"
 
-#: src/settings.php:137
+#: src/settings.php:146
 msgid "Allowed order status"
 msgstr "允许的订单状态"
 
-#: src/settings.php:138
+#: src/settings.php:147
 msgid "The order status allowed to filter."
 msgstr "允许筛选的订单状态。"
 
-#: src/settings.php:154
+#: src/settings.php:163
 msgid "Use custom template"
 msgstr "使用自定义模板"
 
-#: src/settings.php:161
+#: src/settings.php:170
 msgid "Order list template"
 msgstr "订单列表模板"
 
-#: src/settings.php:162
+#: src/settings.php:171
 msgid "Use optimized template for order list page"
 msgstr "为订单列表页面使用优化的模版"
 
-#: src/settings.php:169
+#: src/settings.php:178
 msgid "Order detail template"
 msgstr "订单详情模板"
 
-#: src/settings.php:170
+#: src/settings.php:179
 msgid "Use optimized template for order detail page"
 msgstr "为订单详情页面使用优化的模版"
 
@@ -98,29 +106,32 @@ msgctxt "hash before order number"
 msgid "#"
 msgstr "#"
 
-#: templates/woocommerce/myaccount/orders.php:110
+#: templates/woocommerce/myaccount/orders.php:111
 msgid "Total"
 msgstr "合计"
 
-#: templates/woocommerce/myaccount/orders.php:141
+#: templates/woocommerce/myaccount/orders.php:142
 msgid "Previous"
 msgstr "上一页"
 
-#: templates/woocommerce/myaccount/orders.php:145
+#: templates/woocommerce/myaccount/orders.php:146
 msgid "Next"
 msgstr "下一页"
 
-#: templates/woocommerce/myaccount/orders.php:152
+#: templates/woocommerce/myaccount/orders.php:153
 msgid "Browse products"
 msgstr "浏览产品"
 
-#: templates/woocommerce/myaccount/orders.php:153
+#: templates/woocommerce/myaccount/orders.php:154
 msgid "No order has been made yet."
 msgstr "暂时没有订单。"
 
-#: woo-chinesize-by-wenprise.php:120 woo-chinesize-by-wenprise.php:122
+#: woo-chinesize-by-wenprise.php:123 woo-chinesize-by-wenprise.php:125
 msgid "All"
 msgstr "所有"
+
+#~ msgid "No matches found"
+#~ msgstr "没有找到相关内容"
 
 #~ msgid "Allow filter order by status"
 #~ msgstr "允许在筛选器中出现的状态"

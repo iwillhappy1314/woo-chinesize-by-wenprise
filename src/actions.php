@@ -171,3 +171,22 @@ add_action('wp_head', function ()
                 }
             </style>";
 });
+
+
+/**
+ * 移除 Select2 - Woocommerce 3.2.1+
+ */
+add_action('wp_enqueue_scripts', function ()
+{
+
+    if (get_option('wccn_disable_select2', 'no') === 'yes') {
+        if (class_exists('woocommerce')) {
+            wp_dequeue_style('select2');
+            wp_deregister_style('select2');
+
+            wp_dequeue_script('selectWoo');
+            wp_deregister_script('selectWoo');
+        }
+    }
+
+}, 100);
