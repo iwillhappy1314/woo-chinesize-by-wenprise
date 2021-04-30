@@ -10,7 +10,7 @@ WC tested up to: 5.0
 Stable tag: 1.2.1
 License: GPL-2.0+
 
-优化 WooCommerce 在中国的使用体验，地址字段重新排序，实现省市关联选择
+优化中国使用体验，实现省市区关联、订单模版优化等。
 
 ## Description ##
 
