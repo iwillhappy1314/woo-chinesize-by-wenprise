@@ -206,6 +206,26 @@
     border-bottom: 2px solid var(--woocommerce);
 }
 
+.woocommerce-OrderUpdate{
+    border-left: 1px solid #eee;
+    padding-left: 24px;
+    list-style: none;
+    padding-bottom: 16px;
+    position: relative;
+    margin-left: 0 !important;
+}
+
+.woocommerce-OrderUpdate:before{
+    content: '';
+    width: 9px;
+    height: 9px;
+    border-radius: 9px;
+    position: absolute;
+    left: -5px;
+    top: 4px;
+    background: var(--woocommerce);
+}
+
 .wccn-order__filter-count:before {
     content: '(';
 }
