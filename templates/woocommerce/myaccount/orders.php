@@ -86,7 +86,7 @@ do_action('woocommerce_before_account_orders', $has_orders); ?>
                                     </div>
 
                                     <div class="wccn-item__quantity">
-                                        <?= ($product->get_price()) ? get_woocommerce_currency_symbol() . $product->get_price() : '' ?> x <?= $quantity; ?>
+                                        <?= ($product && $product->get_price()) ? get_woocommerce_currency_symbol() . $product->get_price() : '' ?> x <?= $quantity; ?>
                                     </div>
 
                                     <!--                                    <div class='wccn-item__total'>-->
