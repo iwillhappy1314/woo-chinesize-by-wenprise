@@ -28,6 +28,12 @@ add_filter('woocommerce_default_address_fields', function ($fields)
 
     $state_code = get_user_meta($user_id, 'billing_state', true);
 
+    $address_id    = get_query_var('address-book-edit');
+
+    // $saved_address = wc()->customer->get_meta('fabfw_address', false) ? wc()->customer->get_meta('fabfw_address', false) [ $address_id ] : [];
+
+    // print_r(wc()->customer->get_meta('fabfw_address', false));
+
     // 国家
     $fields[ 'country' ][ 'class' ][] = 'wccn-is-hidden';
 
@@ -126,17 +132,6 @@ add_filter('woocommerce_billing_fields', function ($fields)
 
 
 /**
- * 修改地址显示格式
- */
-add_filter('woocommerce_localisation_address_formats', function ($formats)
-{
-    $formats[ 'CN' ] = "{state}{city}{address_1}{address_2}\n{company}\n{name}";
-
-    return $formats;
-});
-
-
-/**
  * 兼容 fr-address-book-for-woocommerce 插件
  */
 add_filter('fr_address_book_for_woocommerce_address_fields', function ($fields, $address_id, $saved_addresses)
@@ -161,7 +156,16 @@ add_filter('fr_address_book_for_woocommerce_address_fields', function ($fields, 
 }, 10, 3);
 
 
-// add_filter('woocommerce_checkout_fields');
+/**
+ * 修改地址显示格式
+ */
+add_filter('woocommerce_localisation_address_formats', function ($formats)
+{
+    $formats[ 'CN' ] = "{state}{city}{address_1}{address_2}\n{company}\n{name}";
+
+    return $formats;
+});
+
 
 add_action('wp_head', function ()
 {

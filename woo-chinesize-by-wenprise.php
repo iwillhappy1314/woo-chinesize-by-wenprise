@@ -30,6 +30,11 @@ add_action('plugins_loaded', function ()
 
     require WENPRISE_WC_CHINESIZE_PATH . 'src/helpers.php';
     require WENPRISE_WC_CHINESIZE_PATH . 'src/actions.php';
+    require WENPRISE_WC_CHINESIZE_PATH . 'src/Modules/IDVerification.php';
+    require WENPRISE_WC_CHINESIZE_PATH . 'src/Modules/InvoiceFields.php';
+
+    new \WooChinesize\Modules\IDVerification();
+    new \WooChinesize\Modules\InvoiceFields();
 
     add_filter('woocommerce_get_settings_pages', function ($settings)
     {
