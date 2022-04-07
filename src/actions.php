@@ -1,4 +1,4 @@
-<?php
+`<?php
 
 
 /**
@@ -29,19 +29,33 @@ add_filter('woocommerce_default_address_fields', function ($fields)
     $state_code = get_user_meta($user_id, 'billing_state', true);
 
     $address_id    = get_query_var('address-book-edit');
+    $saved_address = [];
 
-    // $saved_address = wc()->customer->get_meta('fabfw_address', false) ? wc()->customer->get_meta('fabfw_address', false) [ $address_id ] : [];
+    if ($address_id) {
+        $address_data = wc()->customer->get_meta('fabfw_address', false);
 
-    // print_r(wc()->customer->get_meta('fabfw_address', false));
+        $addresses = array_filter(array_values($address_data), function ($address) use ($address_id)
+        {
+            return $address->get_data()[ 'id' ] == $address_id;
+        });
+
+        if ($addresses) {
+            $saved_address = array_values($addresses)[ 0 ]->get_data()[ 'value' ];
+        }
+    }
+
+    $countries = new WC_Countries();
 
     // 国家
-    $fields[ 'country' ][ 'class' ][] = 'wccn-is-hidden';
+    // $fields[ 'country' ][ 'class' ][] = 'wccn-is-hidden';
 
     // 省/直辖市/自治区
     $fields[ 'state' ][ 'label' ]                               = '省份';
+    $fields[ 'state' ][ 'type' ]                                = 'select';
+    $fields[ 'state' ][ 'options' ]                             = $countries->get_states('CN');
     $fields[ 'state' ][ 'class' ][]                             = 'form-row-first';
     $fields[ 'state' ][ 'class' ][]                             = 'wc-select';
-    $fields[ 'state' ][ 'custom_attributes' ][ 'data-default' ] = $state_code;
+    $fields[ 'state' ][ 'custom_attributes' ][ 'data-default' ] = $saved_address ? $saved_address[ 'state' ] : $state_code;
     unset($fields[ 'state' ][ 'class' ][ 0 ]);
 
     // 城市
@@ -169,11 +183,11 @@ add_filter('woocommerce_localisation_address_formats', function ($formats)
 
 add_action('wp_head', function ()
 {
-    echo "<style type='text/css'>
-                .wccn-is-hidden {
-                    display: none !important;
-                }
-            </style>";
+    echo "<style>
+            .wccn-is-hidden {
+                display: none !important;
+            }
+        </style>";
 });
 
 

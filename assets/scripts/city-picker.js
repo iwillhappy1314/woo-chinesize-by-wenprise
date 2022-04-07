@@ -6,7 +6,7 @@
     var city_el = $('#billing_city, #shipping_city');
     var area_el = $('#billing_address_1, #shipping_address_1');
 
-    var event = 'change';
+    var event = 'ready change';
     if (jQuery.fn.select2) {
         event = 'select2:select';
     }
