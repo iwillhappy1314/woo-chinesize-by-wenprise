@@ -48,8 +48,8 @@ add_action('plugins_loaded', function ()
 add_action('wp_enqueue_scripts', function ()
 {
     // if (is_checkout() || is_wc_endpoint_url('edit-address')) {
-    wp_register_script('wccn-distpicker', WENPRISE_WC_CHINESIZE_URL . 'assets/scripts/distpicker.min.js', ['jquery', 'wccn-city-data'], WENPRISE_WC_CHINESIZE_VERSION, true);
-    wp_register_script('wccn-city-picker', WENPRISE_WC_CHINESIZE_URL . 'assets/scripts/city-picker.js', ['jquery',  'wccn-distpicker'], WENPRISE_WC_CHINESIZE_VERSION, true);
+    wp_register_script('wccn-distpicker', WENPRISE_WC_CHINESIZE_URL . 'assets/scripts/distpicker.min.js', ['jquery'], WENPRISE_WC_CHINESIZE_VERSION, true);
+    wp_register_script('wccn-city-picker', WENPRISE_WC_CHINESIZE_URL . 'assets/scripts/city-picker.js', ['jquery', 'wccn-distpicker'], WENPRISE_WC_CHINESIZE_VERSION, true);
     wp_enqueue_script('wccn-city-picker');
     // }
 
