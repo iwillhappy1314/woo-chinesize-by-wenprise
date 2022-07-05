@@ -18,8 +18,8 @@ if ( ! in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', g
     return false;
 }
 
-define('WENPRISE_WC_CHINESIZE_VERSION', '1.0.3');
-define('WENPRISE_WC_CHINESIZE_FILE_PATH', __FILE__);
+const WENPRISE_WC_CHINESIZE_VERSION = '1.0.3';
+const WENPRISE_WC_CHINESIZE_FILE_PATH = __FILE__;
 define('WENPRISE_WC_CHINESIZE_PATH', plugin_dir_path(__FILE__));
 define('WENPRISE_WC_CHINESIZE_URL', plugin_dir_url(__FILE__));
 
@@ -47,11 +47,10 @@ add_action('plugins_loaded', function ()
 
 add_action('wp_enqueue_scripts', function ()
 {
-    // if (is_checkout() || is_wc_endpoint_url('edit-address')) {
-    wp_register_script('wccn-distpicker', WENPRISE_WC_CHINESIZE_URL . 'assets/scripts/distpicker.min.js', ['jquery'], WENPRISE_WC_CHINESIZE_VERSION, true);
-    wp_register_script('wccn-city-picker', WENPRISE_WC_CHINESIZE_URL . 'assets/scripts/city-picker.js', ['jquery', 'wccn-distpicker'], WENPRISE_WC_CHINESIZE_VERSION, true);
-    wp_enqueue_script('wccn-city-picker');
-    // }
+    if (is_checkout() || is_account_page()) {
+        wp_register_script('wccn-distpicker', WENPRISE_WC_CHINESIZE_URL . 'assets/scripts/distpicker.min.js', ['jquery'], WENPRISE_WC_CHINESIZE_VERSION, true);
+        wp_enqueue_script('wccn-city-picker', WENPRISE_WC_CHINESIZE_URL . 'assets/scripts/city-picker.js', ['jquery', 'wccn-distpicker'], WENPRISE_WC_CHINESIZE_VERSION, true);
+    }
 
     wp_enqueue_style('wccn-style', WENPRISE_WC_CHINESIZE_URL . 'assets/styles/style.css', [], WENPRISE_WC_CHINESIZE_VERSION, '');
 }, 999);
