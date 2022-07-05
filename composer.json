@@ -1,0 +1,20 @@
+{
+  "name": "wenprise/woo-chinesize",
+  "description": "Improve WooCommerce use experience in China",
+  "require": {
+    "wpackio/enqueue": "^3.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "WooChinesize\\": "src/"
+    }
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Amos Lee",
+      "email": "iwillhappy1314@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable"
+}

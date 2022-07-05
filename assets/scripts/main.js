@@ -1,4 +1,7 @@
-﻿(function($) {
+﻿import Distpicker from './distpicker';
+import stateMap from './state-map';
+
+(function($) {
 
   'use strict';
 
@@ -43,41 +46,6 @@
 
   let swap = (o, r = {}) => Object.keys(o).map(k => r[o[k]] = k) && r;
 
-  var stateMap = {
-    '云南省'     : 'CN1',
-    '北京市'     : 'CN2',
-    '天津市'     : 'CN3',
-    '河北省'     : 'CN4',
-    '山西省'     : 'CN5',
-    '內蒙古自治区'  : 'CN6',
-    '辽宁省'     : 'CN7',
-    '吉林省'     : 'CN8',
-    '黑龙江省'    : 'CN9',
-    '上海市'     : 'CN10',
-    '江苏省'     : 'CN11',
-    '浙江省'     : 'CN12',
-    '安徽省'     : 'CN13',
-    '福建省'     : 'CN14',
-    '江西省'     : 'CN15',
-    '山东省'     : 'CN16',
-    '河南省'     : 'CN17',
-    '湖北省'     : 'CN18',
-    '湖南省'     : 'CN19',
-    '广东省'     : 'CN20',
-    '广西壮族自治区' : 'CN21',
-    '海南省'     : 'CN22',
-    '重庆市'     : 'CN23',
-    '四川省'     : 'CN24',
-    '贵州省'     : 'CN25',
-    '陕西省'     : 'CN26',
-    '甘肃省'     : 'CN27',
-    '青海省'     : 'CN28',
-    '宁夏回族自治区' : 'CN29',
-    '澳门特别行政区' : 'CN30',
-    '西藏自治区'   : 'CN31',
-    '新疆维吾尔自治区': 'CN32',
-  };
-
   function updateDisplay() {
     var updateEls;
 
@@ -100,22 +68,39 @@
 
   $(document).on('updateDisplay', updateDisplay);
 
-  $('.wccn-billing-distpicker').distpicker({
+  let billingPicker = new Distpicker('.wccn-billing-distpicker', {
     province: swap(stateMap)[$('#billing_state').val()],
     city    : $('#billing_city').val(),
     district: $('#billing_address_1').val(),
   });
 
-  $('.wccn-shipping-distpicker').distpicker({
+  let shippingPicker = new Distpicker('.wccn-shipping-distpicker', {
     province: swap(stateMap)[$('#shipping_state').val()],
     city    : $('#shipping_city').val(),
     district: $('#shipping_address_1').val(),
   });
 
-  $('.wccn-calc-distpicker').distpicker({
+  let calculatorPicker = new Distpicker('.wccn-calc-distpicker', {
     province: swap(stateMap)[$('#calc_shipping_state').val()],
     city    : $('#calc_shipping_city').val(),
   });
+
+  //$('.wccn-billing-distpicker').Distpicker({
+  //  province: swap(stateMap)[$('#billing_state').val()],
+  //  city    : $('#billing_city').val(),
+  //  district: $('#billing_address_1').val(),
+  //});
+
+  //$('.wccn-shipping-distpicker').Distpicker({
+  //  province: swap(stateMap)[$('#shipping_state').val()],
+  //  city    : $('#shipping_city').val(),
+  //  district: $('#shipping_address_1').val(),
+  //});
+  //
+  //$('.wccn-calc-distpicker').Distpicker({
+  //  province: swap(stateMap)[$('#calc_shipping_state').val()],
+  //  city    : $('#calc_shipping_city').val(),
+  //});
 
   /**
    * 兼容 fr address book 插件
