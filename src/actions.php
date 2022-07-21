@@ -226,7 +226,7 @@ add_action('wp_enqueue_scripts', function ()
     }
 
 
-    // 移除这两个JS防止省份选择数据丢失
-    wp_deregister_script('wc-country-select');
-    wp_deregister_script('wc-address-i18n');
+    // 移除这两个JS防止省份选择数据丢失, 不能移除，wc-checkout 依赖这两个文件
+    // wp_deregister_script('wc-country-select');
+    // wp_deregister_script('wc-address-i18n');
 }, 100);
