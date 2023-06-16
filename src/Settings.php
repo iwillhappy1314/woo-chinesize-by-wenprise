@@ -1,9 +1,10 @@
 <?php
 
+namespace WooChinesize;
 /**
  * WC_Settings_Products.
  */
-class WC_Chinesize_Settings extends WC_Settings_Page
+class Settings extends \WC_Settings_Page
 {
 
     /**
@@ -41,7 +42,7 @@ class WC_Chinesize_Settings extends WC_Settings_Page
 
         $settings = $this->get_settings($current_section);
 
-        WC_Admin_Settings::output_fields($settings);
+        \WC_Admin_Settings::output_fields($settings);
     }
 
     /**
@@ -52,7 +53,7 @@ class WC_Chinesize_Settings extends WC_Settings_Page
         global $current_section;
 
         $settings = $this->get_settings($current_section);
-        WC_Admin_Settings::save_fields($settings);
+        \WC_Admin_Settings::save_fields($settings);
 
         if ($current_section) {
             do_action('woocommerce_update_options_' . $this->id . '_' . $current_section);
@@ -195,6 +196,3 @@ class WC_Chinesize_Settings extends WC_Settings_Page
         return apply_filters('woocommerce_get_settings_' . $this->id, $settings, $current_section);
     }
 }
-
-
-return new WC_Chinesize_Settings();

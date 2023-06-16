@@ -2,7 +2,7 @@
 
 namespace WooChinesize;
 
-class Helper
+class Helpers
 {
     /**
      * 获取城市数据
@@ -18,11 +18,47 @@ class Helper
 
 
     /**
+     * 获取资源 URL
+     *
+     * @param string $path 资源组名称
+     * @param string $manifest_directory
+     *
+     * @return string
+     */
+    public static function get_assets_url($path, string $manifest_directory = WENPRISE_WC_CHINESIZE_PATH): string
+    {
+        static $manifest;
+        static $manifest_path;
+
+        if ( ! $manifest_path) {
+            $manifest_path = $manifest_directory . 'frontend/mix-manifest.json';
+        }
+
+        if ( ! $manifest) {
+            // @codingStandardsIgnoreLine
+            $manifest = json_decode(file_get_contents($manifest_path), true);
+        }
+
+        // Remove manifest directory from path
+        $path = str_replace($manifest_directory, '', $path);
+        // Make sure there’s a leading slash
+        $path = '/' . ltrim($path, '/');
+
+        // Get file URL from manifest file
+        $path = $manifest[ $path ];
+        // Make sure there’s no leading slash
+        $path = ltrim($path, '/');
+
+        return WENPRISE_WC_CHINESIZE_URL . 'frontend/' . $path;
+    }
+
+
+    /**
      * 转换 WooCommerce 省份区码为实际区码
      *
      * @param null $wc_code
      *
-     * @return array|mixed
+     * @return array|int
      */
     public static function city_code_convert($wc_code = null)
     {
@@ -76,9 +112,9 @@ class Helper
      *
      * @param $state_code
      *
-     * @return array|mixed
+     * @return array
      */
-    public static function get_state_cities($state_code)
+    public static function get_state_cities($state_code): array
     {
         $location_data = self::get_location_data();
         $cites         = [];
@@ -105,7 +141,7 @@ class Helper
      *
      * @return array
      */
-    public static function get_city_areas($state_code, $city_name)
+    public static function get_city_areas($state_code, $city_name): array
     {
         $cites = self::get_state_cities($state_code);
         $areas = [];
@@ -121,6 +157,50 @@ class Helper
         }
 
         return $areas;
+    }
+
+
+    /**
+     * 获取指定值的默认值
+     *
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    public static function value($value)
+    {
+        return $value instanceof \Closure ? $value() : $value;
+    }
+
+
+    /**
+     * 使用点注释获取数据
+     *
+     * @param array       $array
+     * @param string|null $key
+     * @param mixed       $default
+     *
+     * @return mixed
+     */
+    public static function data_get(array $array, string $key = null, $default = null)
+    {
+        if (is_null($key)) {
+            return $array;
+        }
+
+        if (isset($array[ $key ])) {
+            return $array[ $key ];
+        }
+
+        foreach (explode('.', $key) as $segment) {
+            if ( ! is_array($array) || ! array_key_exists($segment, $array)) {
+                return static::value($default);
+            }
+
+            $array = $array[ $segment ];
+        }
+
+        return $array;
     }
 
 }
