@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import DEFAULTS from './defaults';
 import DISTRICTS from '../../node_modules/v-distpicker/src/districts';
-import { EVENT_CHANGE } from './constants';
+import {EVENT_CHANGE} from './constants';
 
 const DEFAULT_CODE = 100000;
 const PROVINCE = 'province';
@@ -18,9 +18,9 @@ export default class Distpicker {
   }
 
   init() {
-    const { options } = this;
+    const {options} = this;
     const $selects = this.$element.find('select');
-    const { length } = $selects;
+    const {length} = $selects;
     const data = {};
 
     $selects.each((i, select) => $.extend(data, $(select).data()));
@@ -51,8 +51,8 @@ export default class Distpicker {
 
     if (this.$city) {
       this.$city.on(
-        EVENT_CHANGE,
-        (this.onChangeCity = $.proxy(() => this.output(DISTRICT, true), this)),
+          EVENT_CHANGE,
+          (this.onChangeCity = $.proxy(() => this.output(DISTRICT, true), this)),
       );
     }
   }
@@ -68,7 +68,7 @@ export default class Distpicker {
   }
 
   output(type, triggerEvent = false) {
-    const { options, placeholders } = this;
+    const {options, placeholders} = this;
     const $select = this[`$${type}`];
 
     if (!$select || !$select.length) {
@@ -107,7 +107,7 @@ export default class Distpicker {
         data.push({
           name,
           selected,
-          code: i,
+          code : i,
           value: options.valueType === 'name' ? name : i,
         });
       });
@@ -117,8 +117,8 @@ export default class Distpicker {
       const autoselect = options.autoselect || options.autoSelect;
 
       if (data.length && ((type === PROVINCE && autoselect > 0)
-        || (type === CITY && autoselect > 1)
-        || (type === DISTRICT && autoselect > 2))) {
+          || (type === CITY && autoselect > 1)
+          || (type === DISTRICT && autoselect > 2))) {
         data[0].selected = true;
       }
 
@@ -131,9 +131,9 @@ export default class Distpicker {
     // Add placeholder option
     if (options.placeholder) {
       data.unshift({
-        code: '',
-        name: placeholders[type],
-        value: '',
+        code    : '',
+        name    : placeholders[type],
+        value   : '',
         selected: false,
       });
     }

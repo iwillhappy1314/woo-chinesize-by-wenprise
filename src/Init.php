@@ -3,6 +3,9 @@
 namespace WooChinesize;
 
 
+use WooChinesize\Integrate\AddressIntegrate;
+use WooChinesize\Integrate\OrderListIntegrate;
+
 class Init
 {
 
@@ -12,7 +15,8 @@ class Init
     public function __construct()
     {
         $classes = [
-            Integrate::class,
+            AddressIntegrate::class,
+            OrderListIntegrate::class,
             Frontend::class
         ];
 

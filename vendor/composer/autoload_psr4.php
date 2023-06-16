@@ -7,5 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'WooChinesize\\' => array($baseDir . '/src'),
+    'Wenprise\\' => array($vendorDir . '/wenprise/debug/src'),
     'WPackio\\' => array($vendorDir . '/wpackio/enqueue/inc'),
+    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
+    'Symfony\\Component\\VarDumper\\' => array($vendorDir . '/symfony/var-dumper'),
 );
