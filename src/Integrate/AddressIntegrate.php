@@ -41,11 +41,6 @@ class AddressIntegrate
         add_filter('woocommerce_billing_fields', [$this, 'modify_billing_fields'], 20, 1);
 
         /**
-         * 兼容 Fr address book 插件
-         */
-        add_filter('fr_address_book_for_woocommerce_address_fields', [$this, 'modify_fr_address_fields'], 10, 3);
-
-        /**
          * 优化地址显示格式
          */
         add_filter('woocommerce_localisation_address_formats', [$this, 'modify_address_formats'], 10, 3);
@@ -55,7 +50,6 @@ class AddressIntegrate
          */
         add_filter('wp_enqueue_scripts', [$this, 'remove_select2'], 100);
         add_filter('wp_head', [$this, 'add_global_styles'], 100);
-
     }
 
 
@@ -123,28 +117,6 @@ class AddressIntegrate
             return $fields;
         }
 
-        $user_id = get_current_user_id();
-
-        $state_code = get_user_meta($user_id, 'billing_state', true);
-
-        $address_id    = get_query_var('address-book-edit');
-        $saved_address = [];
-
-        if ($address_id) {
-            $address_data = wc()->customer->get_meta('fabfw_address', false);
-
-            $addresses = array_filter(array_values($address_data), function ($address) use ($address_id)
-            {
-                return $address->get_data()[ 'id' ] == $address_id;
-            });
-
-            if ($addresses) {
-                $saved_address = array_values($addresses)[ 0 ]->get_data()[ 'value' ];
-            }
-        }
-
-        $countries = new \WC_Countries();
-
         // 国家
         $fields[ 'country' ][ 'class' ][] = 'wccn-is-hidden';
 
@@ -154,9 +126,8 @@ class AddressIntegrate
         // 省/直辖市/自治区
         $fields[ 'state' ][ 'label' ]   = '省份';
         $fields[ 'state' ][ 'type' ]    = 'text';
-        $fields[ 'state' ][ 'options' ] = $countries->get_states('CN');
         $fields[ 'state' ][ 'class' ][] = 'form-row-first';
-        $fields[ 'state' ][ 'class' ][] = 'wc-select wccn-is-hidden';
+        $fields[ 'state' ][ 'class' ][] = 'wccn-is-hidden';
         unset($fields[ 'state' ][ 'class' ][ 0 ]);
 
         // 城市
@@ -225,29 +196,6 @@ class AddressIntegrate
     }
 
 
-    function modify_fr_address_fields($fields, $address_id, $saved_addresses): array
-    {
-        $state_code = $saved_addresses[ $address_id ][ 'state' ];
-        $city_name  = $saved_addresses[ $address_id ][ 'city' ];
-        $area_name  = $saved_addresses[ $address_id ][ 'address_1' ];
-
-        $cities = Helpers::get_state_cities($state_code);
-        $cities = wp_list_pluck($cities, 'name', 'name');
-
-        $areas = Helpers::get_city_areas($state_code, $city_name);
-        $areas = wp_list_pluck($areas, 'name', 'name');
-
-        $fields[ 'billing_city' ][ 'options' ]                             = $cities;
-        $fields[ 'billing_city' ][ 'custom_attributes' ][ 'data-default' ] = $city_name;
-
-        $fields[ 'billing_address_1' ][ 'options' ] = $areas;
-
-        $fields[ 'billing_address_1' ][ 'custom_attributes' ][ 'data-default' ] = $area_name;
-
-        return $fields;
-    }
-
-
     function modify_address_formats($formats)
     {
         $formats[ 'CN' ] = "{state}{city}{address_1}{address_2}\n{company}\n{name}";
@@ -282,6 +230,9 @@ class AddressIntegrate
         wp_deregister_script('wc-country-select');
         wp_deregister_script('wc-address-i18n');
 
+	    /**
+	     * 直接移除wc-country-select和wc-address-i18n会导致 checkout.js 无法加载，移除后，添加两个假的js以满足 checkout.js 的依赖
+	     */
         wp_register_script('wc-country-select', Helpers::get_assets_url('/dist/scripts/main.js'), ['jquery'], WENPRISE_WC_CHINESIZE_VERSION, true);
         wp_register_script('wc-address-i18n', Helpers::get_assets_url('/dist/scripts/main.js'), ['jquery'], WENPRISE_WC_CHINESIZE_VERSION, true);
     }
