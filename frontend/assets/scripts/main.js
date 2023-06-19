@@ -1,4 +1,4 @@
-﻿import Distpicker from './distpicker';
+﻿import Distpicker from './distpicker/distpicker';
 import stateMap from './state-map';
 import Alpine from 'alpinejs';
 
@@ -6,24 +6,40 @@ let swap = (o, r = {}) => Object.keys(o).map(k => r[o[k]] = k) && r;
 
 document.addEventListener('alpine:init', () => {
   Alpine.data('wccnHandler', () => ({
+    init() {
+      this.billingAddress.state = swap(stateMap)[$('#billing_state').val()];
+      this.billingAddress.state2 = $('#billing_state').val();
+      this.billingAddress.city = $('#billing_city').val();
+      this.billingAddress.address_1 = $('#billing_address_1').val();
+
+      this.shippingAddress.state = swap(stateMap)[$('#shipping_state').val()];
+      this.shippingAddress.state2 = $('#shipping_state').val();
+      this.shippingAddress.city = $('#shipping_city').val();
+      this.shippingAddress.address_1 = $('#shipping_address_1').val();
+    },
     billingAddress : {
-      'state'    : '',
-      'state2'   : '',
-      'city'     : '',
+      'state': '',
+      'state2': '',
+      'city': '',
       'address_1': '',
     },
     shippingAddress: {
-      'state'    : '',
-      'state2'   : '',
-      'city'     : '',
+      'state': '',
+      'state2': '',
+      'city': '',
       'address_1': '',
     },
-    selectState(state) {
+    selectBillingState(state) {
       this.billingAddress.state2 = stateMap[state];
+    },
+    selectShippingState(state) {
       this.shippingAddress.state2 = stateMap[state];
-
-      console.log(state);
-      console.log(stateMap[state]);
+    },
+    selectBillingState2(state) {
+      this.billingAddress.state = swap(stateMap)[state];
+    },
+    selectShippingState2(state) {
+      this.shippingAddress.state = swap(stateMap)[state];
     },
   }));
 });
@@ -35,6 +51,10 @@ Alpine.start();
 (function($) {
 
   'use strict';
+
+  console.log($('#billing_state').val());
+  console.log($('#billing_city').val());
+  console.log($('#billing_address_1').val());
 
   let billingPicker = new Distpicker('.wccn-billing-distpicker', {
     province: swap(stateMap)[$('#billing_state').val()],

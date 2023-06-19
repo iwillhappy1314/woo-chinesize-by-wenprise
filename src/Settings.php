@@ -23,7 +23,7 @@ class Settings extends \WC_Settings_Page
      *
      * @return array
      */
-    public function get_sections()
+    public function get_sections(): array
     {
         $sections = [
             ''                => __('Templates', 'wc-chinesize'),
@@ -67,7 +67,7 @@ class Settings extends \WC_Settings_Page
      *
      * @return array
      */
-    public function get_settings($current_section = '')
+    public function get_settings(string $current_section = ''): array
     {
         if ('checkout_fields' === $current_section) {
 

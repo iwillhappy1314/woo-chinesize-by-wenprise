@@ -25,7 +25,7 @@ class Helpers
      *
      * @return string
      */
-    public static function get_assets_url($path, string $manifest_directory = WENPRISE_WC_CHINESIZE_PATH): string
+    public static function get_assets_url(string $path, string $manifest_directory = WENPRISE_WC_CHINESIZE_PATH): string
     {
         static $manifest;
         static $manifest_path;

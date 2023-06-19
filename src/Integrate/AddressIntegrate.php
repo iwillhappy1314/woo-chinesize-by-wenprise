@@ -10,11 +10,17 @@ class AddressIntegrate
 
     public function __construct()
     {
+        /**
+         * 添加 alpine data wrapper
+         */
         add_action('woocommerce_before_checkout_form', [$this, 'add_alpine_start_wrapper']);
         add_action('woocommerce_after_checkout_form', [$this, 'add_alpine_end_wrapper']);
 
         add_action('woocommerce_before_edit_account_address_form', [$this, 'add_alpine_start_wrapper']);
         add_action('woocommerce_after_edit_account_address_form', [$this, 'add_alpine_end_wrapper']);
+
+        add_action('woocommerce_before_shipping_calculator', [$this, 'add_alpine_start_wrapper']);
+        add_action('woocommerce_after_shipping_calculator', [$this, 'add_alpine_end_wrapper']);
 
         /**
          * 禁用计算器中的国家选择
@@ -22,15 +28,38 @@ class AddressIntegrate
         add_filter('woocommerce_shipping_calculator_enable_country', '__return_false');
 
 
+        /**
+         * 添加省市区选择表单
+         */
         add_filter('woocommerce_form_field_text', [$this, 'add_dist_picker_fields'], 10, 4);
+
+        /**
+         * 修改默认结账地址表单
+         */
         add_filter('woocommerce_default_address_fields', [$this, 'modify_default_fields'], 20, 1);
         add_filter('woocommerce_shipping_fields', [$this, 'modify_shipping_fields'], 20, 1);
         add_filter('woocommerce_billing_fields', [$this, 'modify_billing_fields'], 20, 1);
+
+        /**
+         * 兼容 Fr address book 插件
+         */
         add_filter('fr_address_book_for_woocommerce_address_fields', [$this, 'modify_fr_address_fields'], 10, 3);
+
+        /**
+         * 优化地址显示格式
+         */
         add_filter('woocommerce_localisation_address_formats', [$this, 'modify_address_formats'], 10, 3);
 
+        /**
+         * 调整前端资源
+         */
         add_filter('wp_enqueue_scripts', [$this, 'remove_select2'], 100);
         add_filter('wp_head', [$this, 'add_global_styles'], 100);
+
+        // add_filter('woocommerce_form_field', function ($field, $key, $args, $value)
+        // {
+        //
+        // }, 10, 4);
 
     }
 
@@ -44,7 +73,7 @@ class AddressIntegrate
             $field = '<div class="wccn-billing-distpicker">
             <p class="form-row address-field form-row-first wc-select validate-required validate-state">
                  <label for="wccn-state">省/直辖市/自治区*</label>
-                 <select data-bind="billing-state" x-on:change="selectState(billingAddress.state)" x-model="billingAddress.state" id="wccn-state"></select>
+                 <select data-bind="billing-state" x-on:change="selectBillingState(billingAddress.state)" x-model="billingAddress.state" id="wccn-state"></select>
             </p>
             
             <p class="form-row address-field form-row-last wc-select validate-required validate-state">
@@ -63,7 +92,7 @@ class AddressIntegrate
             $field = '<div class="wccn-shipping-distpicker">
             <p class="form-row address-field form-row-first wc-select validate-required validate-state">
                  <label for="wccn-state">省/直辖市/自治区*</label>
-                 <select data-bind="shipping-state" x-model="shippingAddress.state" id="wccn-state"></select>
+                 <select data-bind="shipping-state" x-on:change="selectShippingState(shippingAddress.state)" x-model="shippingAddress.state" id="wccn-state"></select>
             </p>
             
             <p class="form-row address-field form-row-last wc-select validate-required validate-state">
@@ -80,6 +109,7 @@ class AddressIntegrate
 
         return $field;
     }
+
 
     /**
      * 修改默认字段
@@ -120,8 +150,6 @@ class AddressIntegrate
 
         $countries = new \WC_Countries();
 
-        // dd($fields);
-
         // 国家
         $fields[ 'country' ][ 'class' ][] = 'wccn-is-hidden';
 
@@ -129,8 +157,8 @@ class AddressIntegrate
         $fields[ 'distpicker' ][ 'type' ]     = 'text';
 
         // 省/直辖市/自治区
-        $fields[ 'state' ][ 'label' ] = '省份';
-        // $fields[ 'state' ][ 'type' ]    = 'text';
+        $fields[ 'state' ][ 'label' ]   = '省份';
+        $fields[ 'state' ][ 'type' ]    = 'text';
         $fields[ 'state' ][ 'options' ] = $countries->get_states('CN');
         $fields[ 'state' ][ 'class' ][] = 'form-row-first';
         $fields[ 'state' ][ 'class' ][] = 'wc-select wccn-is-hidden';
@@ -166,11 +194,13 @@ class AddressIntegrate
 
 
     /**
-     * 设置收件地址字段值
+     * 添加 x-model 到收货地址字段中
      */
     function modify_shipping_fields($fields): array
     {
         $fields[ 'shipping_state' ][ 'custom_attributes' ][ 'x-model' ]     = 'shippingAddress.state2';
+        $fields[ 'shipping_state' ][ 'custom_attributes' ][ 'x-on:change' ] = 'selectShippingState2(shippingAddress.state2)';
+
         $fields[ 'shipping_city' ][ 'custom_attributes' ][ 'x-model' ]      = 'shippingAddress.city';
         $fields[ 'shipping_address_1' ][ 'custom_attributes' ][ 'x-model' ] = 'shippingAddress.address_1';
 
@@ -178,9 +208,18 @@ class AddressIntegrate
     }
 
 
+    /**
+     * 添加 x-model 到账单地址字段中
+     *
+     * @param $fields
+     *
+     * @return array
+     */
     function modify_billing_fields($fields): array
     {
         $fields[ 'billing_state' ][ 'custom_attributes' ][ 'x-model' ]     = 'billingAddress.state2';
+        $fields[ 'billing_state' ][ 'custom_attributes' ][ 'x-on:change' ] = 'selectBillingState2(billingAddress.state2)';
+
         $fields[ 'billing_city' ][ 'custom_attributes' ][ 'x-model' ]      = 'billingAddress.city';
         $fields[ 'billing_address_1' ][ 'custom_attributes' ][ 'x-model' ] = 'billingAddress.address_1';
 
@@ -200,12 +239,12 @@ class AddressIntegrate
         $areas = Helpers::get_city_areas($state_code, $city_name);
         $areas = wp_list_pluck($areas, 'name', 'name');
 
-        $fields[ 'billing_city' ][ 'options' ] = $cities;
-        // $fields[ 'billing_city' ][ 'custom_attributes' ][ 'data-default' ] = $city_name;
+        $fields[ 'billing_city' ][ 'options' ]                             = $cities;
+        $fields[ 'billing_city' ][ 'custom_attributes' ][ 'data-default' ] = $city_name;
 
         $fields[ 'billing_address_1' ][ 'options' ] = $areas;
 
-        // $fields[ 'billing_address_1' ][ 'custom_attributes' ][ 'data-default' ] = $area_name;
+        $fields[ 'billing_address_1' ][ 'custom_attributes' ][ 'data-default' ] = $area_name;
 
         return $fields;
     }
@@ -240,16 +279,25 @@ class AddressIntegrate
                 wp_deregister_script('selectWoo');
             }
         }
+
+        // 移除这两个JS防止省份选择数据丢失, 不能移除，wc-checkout 依赖这两个文件
+        wp_deregister_script('wc-country-select');
+        wp_deregister_script('wc-address-i18n');
+
+        wp_register_script('wc-country-select', Helpers::get_assets_url('/dist/scripts/main.js'), ['jquery'], WENPRISE_WC_CHINESIZE_VERSION, true);
+        wp_register_script('wc-address-i18n', Helpers::get_assets_url('/dist/scripts/main.js'), ['jquery'], WENPRISE_WC_CHINESIZE_VERSION, true);
     }
 
 
     function add_global_styles()
     {
-        // echo "<style>
-        //         .wccn-is-hidden {
-        //             display: none !important;
-        //         }
-        //     </style>";
+        if (defined('WP_DEBUG') && WP_DEBUG !== true) {
+            echo "<style>
+                .wccn-is-hidden {
+                    display: none !important;
+                }
+            </style>";
+        }
     }
 
 }

@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import DEFAULTS from './defaults';
-import DISTRICTS from '../../node_modules/v-distpicker/src/districts';
+import DISTRICTS from 'v-distpicker/src/districts';
 import {EVENT_CHANGE} from './constants';
 
 const DEFAULT_CODE = 100000;

@@ -14,13 +14,21 @@ class OrderListIntegrate
         add_filter('woocommerce_before_account_orders', [$this, 'add_status_filter'], 10, 3);
 
         add_filter('woocommerce_order_query_args', [$this, 'modify_query_args']);
-        add_filter('woocommerce_order_item_class', [$this, 'append_item_class']);
 
         add_filter('woocommerce_order_item_class', [$this, 'append_item_class'], 12, 3);
 
     }
 
 
+    /**
+     * 加载插件中自定义的WooCommerce模板
+     *
+     * @param $template
+     * @param $template_name
+     * @param $template_path
+     *
+     * @return mixed|string
+     */
     function locate_template($template, $template_name, $template_path)
     {
         global $woocommerce;
@@ -52,6 +60,15 @@ class OrderListIntegrate
     }
 
 
+    /**
+     * 添加产品图像到订单列表中
+     *
+     * @param $html
+     * @param $item
+     * @param $is_visible
+     *
+     * @return mixed|string
+     */
     function add_order_item_image($html, $item, $is_visible)
     {
         if (get_option('wccn_order_detail_template_enabled', 'yes') !== 'yes') {
@@ -69,7 +86,11 @@ class OrderListIntegrate
 
     }
 
-
+    /**
+     * 添加订单状态选择到订单列表中
+     *
+     * @return false|void
+     */
     function add_status_filter()
     {
         if (get_option('wccn_order_filter_enabled') !== 'yes') {
@@ -140,7 +161,7 @@ class OrderListIntegrate
     }
 
 
-    function append_item_class($class, $item, $order)
+    function append_item_class($class, $item, $order): string
     {
         return $class . ' wccn-order-detail-item';
     }
