@@ -52,10 +52,6 @@ Alpine.start();
 
   'use strict';
 
-  console.log($('#billing_state').val());
-  console.log($('#billing_city').val());
-  console.log($('#billing_address_1').val());
-
   let billingPicker = new Distpicker('.wccn-billing-distpicker', {
     province: swap(stateMap)[$('#billing_state').val()],
     city    : $('#billing_city').val(),
@@ -72,6 +68,14 @@ Alpine.start();
     province: swap(stateMap)[$('#calc_shipping_state').val()],
     city    : $('#calc_shipping_city').val(),
   });
+
+  //$('#billing_state').on('change', function(event) {
+  //  new Distpicker('.wccn-billing-distpicker', {
+  //    province: swap(stateMap)[$('#billing_state').val()],
+  //    city    : $('#billing_city').val(),
+  //    district: $('#billing_address_1').val(),
+  //  });
+  //});
 
   /**
    * 兼容 fr address book 插件

@@ -56,11 +56,6 @@ class AddressIntegrate
         add_filter('wp_enqueue_scripts', [$this, 'remove_select2'], 100);
         add_filter('wp_head', [$this, 'add_global_styles'], 100);
 
-        // add_filter('woocommerce_form_field', function ($field, $key, $args, $value)
-        // {
-        //
-        // }, 10, 4);
-
     }
 
 
@@ -69,7 +64,7 @@ class AddressIntegrate
      */
     function add_dist_picker_fields($field, $key, $args, $value)
     {
-        if ($key === 'billing_distpicker') {
+        if ($args['id'] === 'billing_distpicker') {
             $field = '<div class="wccn-billing-distpicker">
             <p class="form-row address-field form-row-first wc-select validate-required validate-state">
                  <label for="wccn-state">省/直辖市/自治区*</label>
@@ -88,7 +83,7 @@ class AddressIntegrate
         </div>';
         }
 
-        if ($key === 'shipping_distpicker') {
+        if ($args['id'] === 'shipping_distpicker') {
             $field = '<div class="wccn-shipping-distpicker">
             <p class="form-row address-field form-row-first wc-select validate-required validate-state">
                  <label for="wccn-state">省/直辖市/自治区*</label>
@@ -200,8 +195,10 @@ class AddressIntegrate
     {
         $fields[ 'shipping_state' ][ 'custom_attributes' ][ 'x-model' ]     = 'shippingAddress.state2';
         $fields[ 'shipping_state' ][ 'custom_attributes' ][ 'x-on:change' ] = 'selectShippingState2(shippingAddress.state2)';
+        $fields[ 'shipping_state' ][ 'custom_attributes' ][ 'x-on:input.change' ] = 'console.log("test");';
 
         $fields[ 'shipping_city' ][ 'custom_attributes' ][ 'x-model' ]      = 'shippingAddress.city';
+
         $fields[ 'shipping_address_1' ][ 'custom_attributes' ][ 'x-model' ] = 'shippingAddress.address_1';
 
         return $fields;
@@ -221,6 +218,7 @@ class AddressIntegrate
         $fields[ 'billing_state' ][ 'custom_attributes' ][ 'x-on:change' ] = 'selectBillingState2(billingAddress.state2)';
 
         $fields[ 'billing_city' ][ 'custom_attributes' ][ 'x-model' ]      = 'billingAddress.city';
+
         $fields[ 'billing_address_1' ][ 'custom_attributes' ][ 'x-model' ] = 'billingAddress.address_1';
 
         return $fields;
@@ -291,13 +289,11 @@ class AddressIntegrate
 
     function add_global_styles()
     {
-        if (defined('WP_DEBUG') && WP_DEBUG !== true) {
-            echo "<style>
-                .wccn-is-hidden {
-                    display: none !important;
-                }
-            </style>";
-        }
+        echo "<style>
+            .wccn-is-hidden {
+                display: none !important;
+            }
+        </style>";
     }
 
 }
