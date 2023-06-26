@@ -26,6 +26,14 @@ License: GPL-2.0+
 * 在订单列表中添加订单过滤器（按状态）
 * 优化中国地址显示格式
 
+
+## Frequently Asked Questions ##
+
+### 是否支持地址簿插件 ###
+
+支持修改过的 Fr Address Book For Woocommerce 插件，请从[Github仓库](https://github.com/iwillhappy1314/fr-address-book-for-woocommerce) 下载并手动安装。
+
+
 ### Support 技术支持 ###
 
 Email: amos@wpcio.com
