@@ -10,8 +10,6 @@
  * Domain Path: /languages
  */
 
-use WooChinesize\Init;
-
 if ( ! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -32,5 +30,5 @@ add_action('plugins_loaded', function ()
 
     require WENPRISE_WC_CHINESIZE_PATH . 'vendor/autoload.php';
 
-    new Init();
+    new \WooChinesize\Init();
 });
