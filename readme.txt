@@ -7,7 +7,7 @@ Requires at least: 4.7
 Tested up to: 6.2
 WC requires at least: 3.5
 WC tested up to: 5.0
-Stable tag: 1.2.2
+Stable tag: 1.3.0
 License: GPL-2.0+
 
 优化中国使用体验，实现省市区关联、订单模版优化等。
@@ -49,6 +49,10 @@ Email: amos@wpcio.com
 ## Screenshots ##
 
 ## Changelog ##
+
+### 1.3.0###
+
+* 优化省市区选择实现方法，兼容性更好
 
 ### 1.2.1###
 
